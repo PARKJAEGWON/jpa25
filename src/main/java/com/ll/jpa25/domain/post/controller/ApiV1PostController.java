@@ -27,4 +27,9 @@ public class ApiV1PostController {
     public List<Post> findByUsername(@PathVariable("username")String username) {
         return postService.findByUsername(username);
     }
+
+    @GetMapping("/findWithShareLockById/{id}")
+    public Post findWithShareLockById(@PathVariable Long id) {
+        return postService.findWithShareLockById(id).orElse(null);
+    }
 }
