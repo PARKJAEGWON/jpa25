@@ -47,4 +47,15 @@ public class PostService {
                 .build();
         return postRepository.save(post);
     }
+
+    @SneakyThrows//없어야 정상적인 동작 테스트를 위함
+    @Transactional
+    public Post modifyOptimistic(Long id){
+        Post post =postRepository.findById(id).orElseThrow();
+
+        Thread.sleep(10_000);//없어야 정상적인 동작 테스트를 위함
+
+        post.setUsername(post.getUsername() + "!");
+        return post;
+    }
 }
